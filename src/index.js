@@ -38,7 +38,8 @@ privateKey.split(/(?=-----BEGIN)/).forEach(function (key) {
 execSync('ssh-add -l', { stdio: 'inherit' });
 
 const cloneWithSSH = (repository) => {
-  const command = `git clone --depth=1 -b ${ref} git@codeup.aliyun.com:${repository}.git`;
+  let currentPath = execSync('pwd');
+  const command = `git clone --depth=1 -b ${ref} git@codeup.aliyun.com:${repository}.git ${currentPath}`;
   info(`SSH > ${command}`);
   execSync(command);
 };
